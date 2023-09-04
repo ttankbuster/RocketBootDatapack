@@ -1,0 +1,18 @@
+execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:leather_boots"}}] run execute at @s run execute store result score @s rb.armour1 run data get entity @e[type=minecraft:item,nbt={Item:{id:"minecraft:iron_ingot"}},distance=..1.1,limit=1,sort=nearest] Item.Count
+execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:leather_boots"}}] run execute at @s run execute store result score @s rb.armour2 run data get entity @e[type=minecraft:item,nbt={Item:{id:"minecraft:nether_star"}},distance=..1.1,limit=1,sort=nearest] Item.Count
+execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:leather_boots"}}] run execute at @s run execute store result score @s rb.armour3 run data get entity @e[type=minecraft:item,nbt={Item:{id:"minecraft:firework_rocket"}},distance=..1.1,limit=1,sort=nearest] Item.Count
+execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:leather_boots"}}] run execute at @s run execute store result score @s rb.armour4 run data get entity @e[type=minecraft:item,nbt={Item:{id:"minecraft:glowstone_dust"}},distance=..1.1,limit=1,sort=nearest] Item.Count
+execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:leather_boots"}},scores={rb.armour1=5,rb.armour2=1,rb.armour3=5,rb.armour4=5},nbt=!{Item:{tag:{Tags:["RocketBoots"]}}}] run tag @s add rb.armour
+execute at @e[tag=rb.armour] run kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:iron_ingot",Count:5b}},distance=..1.1,limit=1,sort=nearest]
+execute at @e[tag=rb.armour] run kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:nether_star",Count:1b}},distance=..1.1,limit=1,sort=nearest]
+execute at @e[tag=rb.armour] run kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:firework_rocket",Count:5b}},distance=..1.1,limit=1,sort=nearest]
+execute at @e[tag=rb.armour] run kill @e[type=minecraft:item,nbt={Item:{id:"minecraft:glowstone_dust",Count:5b}},distance=..1.1,limit=1,sort=nearest]
+execute as @e[type=minecraft:item,nbt={Item:{id:"minecraft:leather_boots"}},scores={rb.armour1=5,rb.armour2=1,rb.armour3=5,rb.armour4=5},nbt=!{Item:{tag:{Tags:["RocketBoots"]}}}] run execute at @s run particle minecraft:firework ~ ~ ~ 0.1 0.1 0.1 0.1 100
+execute at @e[tag=rb.armour,nbt={Item:{id:"minecraft:leather_boots"}},scores={rb.armour1=5,rb.armour2=1,rb.armour3=5,rb.armour4=5},nbt=!{Item:{tag:{Tags:["RocketBoots"]}}}] run particle minecraft:flash ~ ~ ~ 0.2 0.2 0.2 1 10
+data merge entity @e[tag=rb.armour,limit=1] {Item:{tag:{Tags:["RocketBoots"]}}}
+tag @e remove rb.armour
+execute at @e[nbt={Item:{id:"minecraft:leather_boots",tag:{Tags:["RocketBoots"]}}}] run execute if entity @e[distance=..1,type=minecraft:item,nbt={Item:{id:"minecraft:netherite_scrap"}}] run particle minecraft:flash ~ ~ ~ 0.2 0.2 0.2 0.1 1
+execute as @e[nbt={Item:{id:"minecraft:leather_boots",tag:{Tags:["RocketBoots"]}}}] run execute at @s run execute if entity @e[distance=..1,type=minecraft:item,nbt={Item:{id:"minecraft:netherite_scrap"}}] run tag @s add rb.armouring
+execute as @e[nbt={Item:{id:"minecraft:leather_boots",tag:{Tags:["RocketBoots"]}}}] run execute at @s run execute if entity @e[distance=..1,type=minecraft:item,nbt={Item:{id:"minecraft:netherite_scrap"}}] run data merge entity @s {Item:{id:"iron_boots",tag:{Tags:["RocketBoots","rb.armoured"]}}}
+execute at @e[tag=rb.armouring,nbt={Item:{id:"minecraft:iron_boots"}}] run kill @e[distance=..1,type=minecraft:item,nbt={Item:{id:"minecraft:netherite_scrap"}}]
+tag @e remove rb.armouring
